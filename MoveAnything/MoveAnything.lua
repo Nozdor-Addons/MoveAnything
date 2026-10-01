@@ -4204,7 +4204,9 @@ function MovAny:ResetScale(f, opt, readonly)
 		end
 		if self.lLinkedScaling[ f:GetName() ] then
 			for i,v in pairs(self.lLinkedScaling[ f:GetName() ]) do
-				self:ResetScale(_G[v], opt)
+				if not self:IsFrameHooked(v) then
+					self:ResetScale(_G[v], opt)
+				end
 			end
 		end
 		if f.OnMAScale then
